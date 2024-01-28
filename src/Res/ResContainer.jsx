@@ -13,7 +13,7 @@ const ResContainer = () => {
 
          {resList.map((eachRes,index) =>
          (
-          <ResCard key={index} resdata={eachRes} />
+          <ResCard key={eachRes.data.id} resdata={eachRes} />
          ))
 }
 
