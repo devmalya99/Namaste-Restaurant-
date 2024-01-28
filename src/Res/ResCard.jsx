@@ -1,5 +1,5 @@
 import React from 'react';
-import resList from './Restaurants';
+import resList from '../utils/Restaurants';
 const ResCard = (props) => {
   const {name, cuisines, avgRating, costForTwo,cloudinaryImageId} = props.resdata.data
   return (

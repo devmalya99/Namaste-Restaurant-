@@ -1,6 +1,6 @@
 import React from 'react';
 import ResCard from './ResCard';
-import resList from './Restaurants';
+import resList from '../utils/Restaurants';
 
 const ResContainer = () => {
   
@@ -8,9 +8,6 @@ const ResContainer = () => {
     <div className='bg-gray-800 p-8 sm:p-12 lg:p-16'>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
        
-
-
-
          {resList.map((eachRes,index) =>
          (
           <ResCard key={eachRes.data.id} resdata={eachRes} />
