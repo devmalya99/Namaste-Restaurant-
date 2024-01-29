@@ -1,61 +1,78 @@
-
+import React, { useState, useEffect } from 'react';
 import ResCard from './ResCard';
 import Shimmer from '../Component/Shimmer';
-import { useState, useEffect } from 'react';
 
 const ResContainer = () => {
+ 
+  const [newRes, setNewRes] = useState([]);
   
-   const [newRes,setNewRes]=useState([])
-   const fetchData=async ()=>
-   {
+  useEffect(() => {
+    fetchData();
+  }, []); // useEffect will get applied once the component is mounted/rendered
+
+
+  const fetchData = async () => {
     try {
-     const data= await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING")
-     const json = await data.json()
-
-     //optional chaining
-     let test=json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-     setNewRes(test)
-     console.log(test)
-    }
-    catch(error)
+       
+       const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.572646&lng=88.36389500000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+       const json = await data.json();
+       console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+       setNewRes(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+       
+    } 
+    
+    catch (error) 
     {
-      console.error("Error fetching data:",error)
-    }
-  }
-
-   useEffect(()=>{
-    fetchData()
-   }, []) ;//useEffect will get applid once the component is mounted/rendered
+       console.error("Error fetching data:", error);
+    }  
+    
+   };
+   
 
    
-   const handleClick =()=>
-   {
-       const filteredList = newRes.filter((item) => item.info.avgRating >4 )
-       console.log(filteredList);
-       setNewRes(filteredList)
-   }
 
-    return (newRes.length===0)?<div><Shimmer/></div>
-    :
-    (
-    <div className='bg-gray-800 p-8 sm:p-12 lg:p-16'>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-      <button 
-        onClick={handleClick}
-        className="bg-blue-500 p-2 m-2 hove hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-         Filter Top Restaurant
-        </button>
-       
-         {
-          Array.isArray(newRes) &&
-         newRes.map((eachRes) =>
-         (
-          <ResCard key={eachRes.info.id} resData={eachRes} />
-         ))}
+  
 
-      </div>
-    </div>
-  )
+  const handleFilterClick = () => {
+    const filteredList = newRes.filter((item) => item.info.avgRating > 4.5);
+    setNewRes(filteredList);
+  };
+
+  const handleResetClick = () => {
+    // Reset the filter
+    fetchData();
+  };
+
+
+ 
+  return newRes.length===0?<Shimmer/>:
+   (<div className='bg-gray-800 p-8 sm:p-12 lg:p-16'>
+   <div className="flex space-x-4">
+<button
+onClick={handleFilterClick}
+className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300"
+>
+Filter Top Restaurants
+</button>
+<button
+onClick={handleResetClick}
+className="bg-gradient-to-r from-gray-500 to-gray-700 hover:from-gray-700 hover:to-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-gray-300 transition duration-300"
+>
+Reset Filter
+</button>
+</div>
+<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+   
+  { newRes.map((eachRes) => (
+     <ResCard key={eachRes.info.id} resData={eachRes} />
+   ))}
+ 
+</div>
+</div>)
+
+   
+    
+  
 };
 
 export default ResContainer;
