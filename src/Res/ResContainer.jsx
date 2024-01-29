@@ -49,6 +49,12 @@ const ResContainer = () => {
     setFilteredRes(filteredRes)
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   const handleResetClick = () => {
     // Reset the filter
     fetchData();
@@ -58,14 +64,16 @@ const ResContainer = () => {
     <Shimmer />
   ) : (
     <div className="bg-gray-800 p-8 sm:p-12 lg:p-16">
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 mb-4">
+        
         <input type="text"
         className=" rounded-lg overflow-hidden transition duration-300 
         ease-in-out transform hover:scale-105" 
         placeholder="Search"
         value={searchText}
         onChange={(e)=>{setSearchText(e.target.value)}}
-         />
+        onKeyDown={handleKeyPress}
+        />
         <button 
         onClick={handleSearch}
         className="bg-gradient-to-r from-pink-500 to-blue-700 overflow-hidden transition duration-300 
@@ -73,6 +81,7 @@ const ResContainer = () => {
 
           Search
         </button>
+        
 
         <button
           onClick={handleFilterClick}
