@@ -34,7 +34,8 @@ const ResContainer = () => {
   
 
   const handleFilterClick = () => {
-    const filteredList = newRes.filter((item) => item.info.avgRating > 4.5);
+    const filteredList = newRes.filter((item) => item.info.avgRating > 4.1);
+    console.log(filteredList);
     setNewRes(filteredList);
   };
 
