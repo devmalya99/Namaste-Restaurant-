@@ -31,7 +31,8 @@ const Header = () => {
           <div className="flex items-center color text-white md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
           <button
           onClick={handleClick}
-          className="relative inline-block px-6 py-3 font-medium text-white transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring focus:border-blue-300 active:from-purple-700 active:to-pink-700 active:shadow-md active:scale-95 rounded-full">
+          className="relative inline-block px-6 py-3 font-medium overflow-hidden transition duration-300 
+          ease-in-out transform hover:scale-105 text-white transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring focus:border-blue-300 active:from-purple-700 active:to-pink-700 active:shadow-md active:scale-95 rounded-full">
             {btnInfo}
           </button>
 

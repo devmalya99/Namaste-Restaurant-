@@ -59,27 +59,32 @@ const ResContainer = () => {
   ) : (
     <div className="bg-gray-800 p-8 sm:p-12 lg:p-16">
       <div className="flex space-x-4">
-        <input type="text" 
+        <input type="text"
+        className=" rounded-lg overflow-hidden transition duration-300 
+        ease-in-out transform hover:scale-105" 
         placeholder="Search"
         value={searchText}
         onChange={(e)=>{setSearchText(e.target.value)}}
          />
         <button 
         onClick={handleSearch}
-        className="bg-gradient-to-r from-pink-500 to-blue-700 hover:from-blue-700 hover:to-pink-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300">
+        className="bg-gradient-to-r from-pink-500 to-blue-700 overflow-hidden transition duration-300 
+        ease-in-out transform hover:scale-105 hover:from-blue-700 hover:to-pink-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300">
 
           Search
         </button>
 
         <button
           onClick={handleFilterClick}
-          className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300"
+          className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 overflow-hidden transition duration-300 
+          ease-in-out transform hover:scale-105 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300"
         >
           Filter Top Restaurants
         </button>
         <button
           onClick={handleResetClick}
-          className="bg-gradient-to-r from-gray-500 to-gray-700 hover:from-gray-700 hover:to-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-gray-300 transition duration-300"
+          className="bg-gradient-to-r from-gray-500 to-gray-700 overflow-hidden transition duration-300 
+          ease-in-out transform hover:scale-105 hover:from-gray-700 hover:to-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-gray-300 transition duration-300"
         >
           Reset Filter
         </button>
