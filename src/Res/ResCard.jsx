@@ -1,7 +1,7 @@
 import React from 'react';
 import resList from '../utils/Restaurants';
-const ResCard = (props) => {
-  const {name, cuisines, avgRating, costForTwo,cloudinaryImageId} = props.resdata.data
+const ResCard = ({resData}) => {
+  const {name, cuisines, avgRating, costForTwo,cloudinaryImageId} = resData.info
   return (
     <div className='bg-white border border-gray-300 rounded-md overflow-hidden transition duration-300 
     ease-in-out transform hover:scale-105 w-full max-w-md mt-4'>
@@ -14,7 +14,7 @@ const ResCard = (props) => {
               <h3 className='text-xl font-semibold mb-2'>{name}</h3>
               <h4 className='text-gray-600'>{cuisines.join(', ')}</h4>
               <h4 className='text-gray-600'>{avgRating}</h4>
-              <h4 className='text-gray-600'>Cost for Two: {costForTwo/100}₹</h4>
+              <h4 className='text-gray-600'>Cost: {costForTwo}</h4>
 
           </div>
       </div>

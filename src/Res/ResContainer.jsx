@@ -1,57 +1,59 @@
 import React from 'react';
 import ResCard from './ResCard';
 import resList from '../utils/Restaurants';
+import { useState, useEffect } from 'react';
 
 const ResContainer = () => {
   
+   const [newRes,setNewRes]=useState([])
+   const fetchData=async ()=>
+   {
+    try {
+     const data= await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING")
+     const json = await data.json()
+     let test=json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
+     setNewRes(test)
+     console.log(test)
+    }
+    catch(error)
+    {
+      console.error("Error fetching data:",error)
+    }
+  }
+
+   useEffect(()=>{
+    fetchData()
+   }, []) ;//useEffect will get applid once the component is mounted/rendered
+
+   
+   const handleClick =()=>
+   {
+       const filteredList = newRes.filter((item) => item.info.avgRating >4 )
+       console.log(filteredList);
+       setNewRes(filteredList)
+   }
+
+
+
   return (
     <div className='bg-gray-800 p-8 sm:p-12 lg:p-16'>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+      <button 
+        onClick={handleClick}
+        className="bg-blue-500 p-2 m-2 hove hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+         Filter Top Restaurant
+        </button>
        
-         {resList.map((eachRes,index) =>
+         {
+          Array.isArray(newRes) &&
+         newRes.map((eachRes) =>
          (
-          <ResCard key={eachRes.data.id} resdata={eachRes} />
-         ))
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       {/* This is working
-        <ResCard 
-           resdata={resList[0]}
-        />
-        <ResCard 
-           resdata={resList[1]}
-        />
-        <ResCard 
-           resdata={resList[2]}
-        />
-        <ResCard 
-           resdata={resList[3]}
-        />
-        <ResCard 
-           resdata={resList[4]}
-        />
-        <ResCard 
-           resdata={resList[5]}
-        /> */}
+          <ResCard key={eachRes.info.id} resData={eachRes} />
+         ))}
 
       </div>
     </div>
-  );
+  )
 };
 
 export default ResContainer;
