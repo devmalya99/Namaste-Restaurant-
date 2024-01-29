@@ -1,6 +1,6 @@
-import React from 'react';
+
 import ResCard from './ResCard';
-import resList from '../utils/Restaurants';
+import Shimmer from '../Component/Shimmer';
 import { useState, useEffect } from 'react';
 
 const ResContainer = () => {
@@ -11,7 +11,9 @@ const ResContainer = () => {
     try {
      const data= await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING")
      const json = await data.json()
-     let test=json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
+
+     //optional chaining
+     let test=json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
      setNewRes(test)
      console.log(test)
     }
@@ -33,9 +35,9 @@ const ResContainer = () => {
        setNewRes(filteredList)
    }
 
-
-
-  return (
+    return (newRes.length===0)?<div><Shimmer/></div>
+    :
+    (
     <div className='bg-gray-800 p-8 sm:p-12 lg:p-16'>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
       <button 

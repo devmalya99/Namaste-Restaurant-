@@ -1,5 +1,4 @@
-import React from 'react';
-import resList from '../utils/Restaurants';
+
 const ResCard = ({resData}) => {
   const {name, cuisines, avgRating, costForTwo,cloudinaryImageId} = resData.info
   return (
