@@ -4,8 +4,8 @@ import Shimmer from "../Component/Shimmer";
 
 const ResContainer = () => {
   const [newRes, setNewRes] = useState([]);
-  const [filteredRes,setFilteredRes]=useState([]);
-  const [searchText,setSearchText]=useState("")
+  const [filteredRes, setFilteredRes] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -26,8 +26,10 @@ const ResContainer = () => {
           ?.restaurants
       );
 
-      setFilteredRes(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants)
+      setFilteredRes(
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -39,18 +41,16 @@ const ResContainer = () => {
     setFilteredRes(filteredList);
   };
 
-  const handleSearch =()=>
-  {
-   const filteredRes= newRes.filter((res)=>
-    {
-      return res.info.name.toLowerCase().includes(searchText.toLowerCase())
-    })
-    console.log(searchText)
-    setFilteredRes(filteredRes)
-  }
+  const handleSearch = () => {
+    const filteredRes = newRes.filter((res) => {
+      return res.info.name.toLowerCase().includes(searchText.toLowerCase());
+    });
+    console.log(searchText);
+    setFilteredRes(filteredRes);
+  };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSearch();
     }
   };
@@ -60,28 +60,29 @@ const ResContainer = () => {
     fetchData();
   };
 
-  return (newRes.length === 0)? (
+  return newRes.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="bg-gray-800 p-8 sm:p-12 lg:p-16">
       <div className="flex space-x-4 mb-4">
-        
-        <input type="text"
-        className=" rounded-lg overflow-hidden transition duration-300 
-        ease-in-out transform hover:scale-105" 
-        placeholder="Search"
-        value={searchText}
-        onChange={(e)=>{setSearchText(e.target.value)}}
-        onKeyDown={handleKeyPress}
+        <input
+          type="text"
+          className=" rounded-lg overflow-hidden transition duration-300 
+        ease-in-out transform hover:scale-105"
+          placeholder="Search"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+          onKeyDown={handleKeyPress}
         />
-        <button 
-        onClick={handleSearch}
-        className="bg-gradient-to-r from-pink-500 to-blue-700 overflow-hidden transition duration-300 
-        ease-in-out transform hover:scale-105 hover:from-blue-700 hover:to-pink-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300">
-
+        <button
+          onClick={handleSearch}
+          className="bg-gradient-to-r from-pink-500 to-blue-700 overflow-hidden transition duration-300 
+        ease-in-out transform hover:scale-105 hover:from-blue-700 hover:to-pink-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300 transition duration-300"
+        >
           Search
         </button>
-        
 
         <button
           onClick={handleFilterClick}
