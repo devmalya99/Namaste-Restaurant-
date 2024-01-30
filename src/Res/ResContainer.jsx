@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ResCard from "./ResCard";
 import Shimmer from "../Component/Shimmer";
-
+import {Link} from "react-router-dom";
 const ResContainer = () => {
   const [newRes, setNewRes] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
@@ -105,7 +105,11 @@ const ResContainer = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredRes.map((eachRes) => (
-          <ResCard key={eachRes.info.id} resData={eachRes} />
+          <Link
+          key={eachRes.info.id}
+          to={"/restaurant/"+eachRes.info.id}>
+          
+          <ResCard resData={eachRes} /></Link>
         ))}
       </div>
     </div>
